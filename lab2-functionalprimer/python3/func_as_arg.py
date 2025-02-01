@@ -1,10 +1,13 @@
-def listFunc():
-    return [i for i in range(1, 6)] #Create list of ints from 1 to 5, Haskell equivalent [1..5]
+from typing import List
 
-def applicatorFunc(inpFunc, s):
+
+def listFunc(a:int, b:int) -> List[int]:
+    return [i for i in range(a, b+1)] #Create list of ints from 1 to 5, Haskell equivalent [1..5]
+
+def applicatorFunc(inpFunc,a:int,b:int,s:str):
     if s=='s':
-        return sum(inpFunc())
+        return sum(inpFunc(a,b))
     else:
-        return sum(inpFunc())/5
+        return sum(inpFunc(a,b))/(b-a+1)
 
-print(applicatorFunc(listFunc, 's'))
+print(applicatorFunc(listFunc,1,10, 'a'))
