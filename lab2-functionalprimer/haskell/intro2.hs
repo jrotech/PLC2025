@@ -1,8 +1,10 @@
 module Intro2 where
 -- test Comment
 -- String algebra:
+name :: [Char]
 name = "Alice"
 -- "if" has a special syntax but otherwise a typed version of Lisp's "if":
+name2 :: [Char]
 name2 = if name /= "" then name else "no name"
 
 pname3 = print "Bob"

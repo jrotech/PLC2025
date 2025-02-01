@@ -1,9 +1,18 @@
 --create inpFunc
-inpFunc = [1..5] 
+inpFunc :: Int -> Int -> [Int]
+inpFunc a b = [a..b] 
 
 --Define applicatorFunc
-applicatorFunc inpFunc s = if s=='s' then sum inpFunc else (sum inpFunc)/5  
+
+applicatorFunc inpFunc a b s | s=='s' = fromIntegral(sum (inpFunc a b)) 
+                             | otherwise = (fromIntegral(sum(inpFunc a b)))/fromIntegral(b-a+1)  
 
 main = do
-    let result = applicatorFunc inpFunc 'a' --Call applicatorFunc with inpFunc and 'a' as args
+    putStrLn "Enter a number"
+    input <- getLine
+    let nr = (read input :: Int)
+    putStrLn "Enter a second number"
+    input2 <- getLine
+    let nr2 = (read input2 :: Int)
+    let result = applicatorFunc inpFunc nr nr2 'a' --Call applicatorFunc with inpFunc and 'a' as args
     putStrLn("sum = " ++ show(result))

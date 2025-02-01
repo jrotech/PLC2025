@@ -1,8 +1,10 @@
 module Intro1 where
 
 -- define named constants:
-r1 = 1
-r2 = b^2 + 1/b where b = 2
+r1 :: Integer
+r1  = 1 
+r2 :: Double
+r2 = b^2 + 1/b where b = 2 
 
 -- define a function:
 diff a b = abs (a - b)
