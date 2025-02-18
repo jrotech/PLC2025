@@ -4,6 +4,7 @@ import Crypt.All
 import Data.Char
 type Command = (String, String, Int)
 
+
 extractPlaintext :: String -> String
 extractPlaintext command = case start of
     ('"' : rest) -> takeWhile (/= '"') rest  -- first char is " extract text until next "
