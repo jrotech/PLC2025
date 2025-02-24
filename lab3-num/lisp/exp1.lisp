@@ -2,15 +2,20 @@
 ; in Java it would be: static float exp1(float a, float b){ return ...; }
 (defun exp1 (a b)
     (+ 
-     1 (*
+     1 
+      (*
         (+
             a
-            b)
+            b
+        )
         (-
             a
             (/
                 1
-                b)))
+                b
+            )
+        )
+      )
     )
 )
 
