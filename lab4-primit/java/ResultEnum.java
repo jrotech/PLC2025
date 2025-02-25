@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.EnumSet;
 
-public class ErrorsBool
+public class ResultEnum
 {
     enum Error { FP_ROUNDING, FP_OVERFLOW, FP_UNDERFLOW, INT_OVERFLOW }
 
@@ -32,24 +32,6 @@ public class ErrorsBool
         return result;
     }
   
-
-    private static Result pl2PLType(Error e)
-    {
-        Result type = 
-            (e == Error.FP_OVERFLOW ? Result.INFINITY :
-                (e == Error.FP_UNDERFLOW ? Result.ZERO :
-                    (e == Error.FP_ROUNDING ? Result.A_BIT_DIFFERENT :  Result.VERY_DIFFERENT
-                    )
-                )
-            );
-        /* 
-            !!!! Beware: The above is not a recommended programming style.
-            !!!!         It is used here only to develop understanding of
-            !!!!         functional and imperative if-then-else statements.
-        */
-        return type;
-    }
-
     private static Result error2Result(Error e)
     {
         Result result = null;
@@ -71,17 +53,38 @@ public class ErrorsBool
         
         return result;
     }
+    private static Error result2Error(Result r)
+    {
+        Error error = null;
+        
+        switch (r) {
+        case A_BIT_DIFFERENT:
+            error = Error.FP_ROUNDING;
+            break;
+        case INFINITY:
+            error = Error.FP_OVERFLOW;
+            break;
+        case ZERO:
+            error = Error.FP_UNDERFLOW;
+            break;
+        case VERY_DIFFERENT:
+            error = Error.INT_OVERFLOW;
+            break;
+        }
+        
+        return error;
+    }
 
     public static void main(String[] args)
     {
-        System.out.print("Known errors = ");
-        for (Error e : EnumSet.allOf(Error.class)) 
+        System.out.print("Known Results = ");
+        for (Result r : EnumSet.allOf(Result.class)) 
         {
-            System.out.print(e + " ");
+            System.out.print(r + " ");
         }
         System.out.println();
         
-        Error e = getEnumElement("error", Error.class);
-        System.out.println(e + " results in: " + error2Result(e));
+        Result r = getEnumElement("result", Result.class);
+        System.out.println(r + " is an error of: " + result2Error(r));
     }
 }
